@@ -20,20 +20,32 @@ docker run -it --rm -p 8081:8081 dockette/nexus
 
 ## Documentation
 
-**Plugins**
+This is Nexus 3 OSS build with full-features community plugins.
 
-- composer
-- helm
-- cpan
-- p2
+**Community repositories**
+
 - cargo
+- chef [WIP]
+- composer
 - conan
+- cpan
+- helm
+- p2
 - puppet
 - vgo
 
 <p>
     <img width="350" src="https://github.com/dockette/nexus/blob/master/.docs/repos1.png">
     <img width="350" src="https://github.com/dockette/nexus/blob/master/.docs/repos2.png">
+</p>
+
+**Community blobstores**
+
+- azure [WIP]
+- google
+
+<p>
+    <img width="700" src="https://github.com/dockette/nexus/blob/master/.docs/blobstores.png">
 </p>
 
 ## Development
