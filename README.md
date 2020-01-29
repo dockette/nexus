@@ -15,8 +15,13 @@
 ## Usage
 
 ```
-docker run -it --rm -p 8081:8081 dockette/nexus
+docker run -it --rm -p 8081:8081 dockette/nexus:3.20.1
 ```
+
+Available tags:
+
+- 3.20.1
+- latest
 
 ## Documentation
 
