@@ -10,13 +10,13 @@ ENV NEXUS_TARGET_DEPLOY=${NEXUS_TARGET}/deploy
 ENV NEXUS_COMPOSER_VERSION=0.0.2
 COPY --from=dockette/nexus:plugin-composer /nexus/nexus-repository-composer-${NEXUS_COMPOSER_VERSION}.jar ${NEXUS_TARGET_DEPLOY}
 
-ENV NEXUS_HELM_VERSION=0.0.13
+ENV NEXUS_HELM_VERSION=1.0.1-SNAPSHOT
 COPY --from=dockette/nexus:plugin-helm /nexus/nexus-repository-helm-${NEXUS_HELM_VERSION}.jar ${NEXUS_TARGET_DEPLOY}
 
 ENV NEXUS_CPAN_VERSION=0.0.1
 COPY --from=dockette/nexus:plugin-cpan /nexus/nexus-repository-cpan-${NEXUS_CPAN_VERSION}.jar ${NEXUS_TARGET_DEPLOY}
 
-ENV NEXUS_P2_VERSION=0.0.4-SNAPSHOT 
+ENV NEXUS_P2_VERSION=0.0.3-SNAPSHOT
 COPY --from=dockette/nexus:plugin-p2 /nexus/nexus-repository-p2-${NEXUS_P2_VERSION}.jar ${NEXUS_TARGET_DEPLOY}
 
 ENV NEXUS_CARGO_VERSION=0.0.1

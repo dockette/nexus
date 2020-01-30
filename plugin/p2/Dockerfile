@@ -4,8 +4,8 @@ ENV NEXUS_VERSION=3.20.1
 ENV NEXUS_BUILD=01
 ENV POM_VERSION=3.19.1-01
 ENV P2_REPO=https://github.com/sonatype-nexus-community/nexus-repository-p2.git
-ENV P2_VERSION=0.0.4-SNAPSHOT
-ENV P2_REV=30134301f05834745e62495ab741355e1e52da28
+ENV P2_VERSION=0.0.3-SNAPSHOT
+ENV P2_REV=9705da99bd78abefd706844482e0996f4791f22f
 
 RUN apt update && apt dist-upgrade -y && \
     apt install -y git

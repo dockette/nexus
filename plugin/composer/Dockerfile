@@ -13,7 +13,7 @@ RUN apt update && apt dist-upgrade -y && \
 WORKDIR /srv
 
 RUN git clone ${COMPOSER_REPO} /srv
-RUN git reset ${COMPOSER_REV}} --hard
+RUN git reset ${COMPOSER_REV} --hard
 RUN sed -i "s/${POM_VERSION}/${NEXUS_VERSION}-${NEXUS_BUILD}/g" /srv/pom.xml
 RUN mvn clean package
 RUN mkdir -p /nexus && cp /srv/nexus-repository-composer/target/nexus-repository-composer-${COMPOSER_VERSION}.jar /nexus/
