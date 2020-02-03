@@ -1,8 +1,16 @@
+NEXUS_VERSION=3.20.1
+
 build:
-	docker build -t dockette/nexus .
+	docker build -t dockette/nexus:${NEXUS_VERSION} .
 
 run: 
-	docker run -it --rm -p 8081:8081 dockette/nexus 
+	docker run -it --rm -p 8081:8081 dockette/nexus:${NEXUS_VERSION} --name nexus
+
+run-password: 
+	docker exec -it nexus cat /nexus-data/admin.password
+
+build-plugins:
+	docker build -t dockette/nexus:plugins-${NEXUS_VERSION} -f Dockerfile.plugins .
 
 build-plugin-cargo:
 	docker build -t dockette/nexus:plugin-cargo -f plugin/cargo/Dockerfile .
