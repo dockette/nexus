@@ -108,10 +108,10 @@ RUN mkdir -p /nexus && cp ${GOOGLE_PATH}/target/nexus-blobstore-google-cloud-${G
 
 ## Helm
 
-ENV HELM_POM=3.19.1-01
+ENV HELM_POM=3.21.0-02
 ENV HELM_REPO=https://github.com/sonatype-nexus-community/nexus-repository-helm.git
-ENV HELM_VERSION=1.0.1-SNAPSHOT
-ENV HELM_REV=1ff0cbcee7b10d69f24f8723228986995bbdd981
+ENV HELM_VERSION=1.0.3-SNAPSHOT
+ENV HELM_REV=efe03517e64fb080d944bcbf9d2acb6e7f0a21c3
 ENV HELM_PATH=/srv/helm
 
 RUN git clone ${HELM_REPO} ${HELM_PATH}
