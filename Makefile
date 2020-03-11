@@ -1,4 +1,4 @@
-NEXUS_VERSION=3.20.1
+NEXUS_VERSION=3.21.1
 
 build:
 	docker build -t dockette/nexus:${NEXUS_VERSION} .

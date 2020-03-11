@@ -1,6 +1,6 @@
 FROM maven:3-jdk-8
 
-ENV NEXUS_VERSION=3.20.1
+ENV NEXUS_VERSION=3.21.1
 ENV NEXUS_BUILD=01
 
 RUN apt update && apt dist-upgrade -y && \
@@ -10,24 +10,24 @@ WORKDIR /srv
 
 ## Azure
 
-# ENV AZURE_POM=3.19.1-01
-# ENV AZURE_REPO=https://github.com/sonatype-nexus-community/nexus-blobstore-azure-cloud.git
-# ENV AZURE_VERSION=0.4.0-SNAPSHOT
-# ENV AZURE_REV=4be8e0454ed2c179839cd3dd06b40bacd656d1b7
-# ENV AZURE_PATH=/srv/azure
+ENV AZURE_POM=3.21.1-01
+ENV AZURE_REPO=https://github.com/sonatype-nexus-community/nexus-blobstore-azure-cloud.git
+ENV AZURE_VERSION=0.5.0-SNAPSHOT
+ENV AZURE_REV=71f502e809dd2b16fa87b98022ac6b702adf5142
+ENV AZURE_PATH=/srv/azure
 
-# RUN git clone ${AZURE_REPO} ${AZURE_PATH}
-# RUN git reset ${AZURE_REV} --hard
-# RUN sed -i "s/${AZURE_POM}/${NEXUS_VERSION}-${NEXUS_BUILD}/g" ${AZURE_PATH}/pom.xml
-# RUN mvn clean package
-# RUN mkdir -p /nexus && cp ${AZURE_PATH}/target/nexus-blobstore-azure-cloud-${AZURE_VERSION}-bundle.kar /nexus/
+RUN git clone ${AZURE_REPO} ${AZURE_PATH}
+RUN git -C ${AZURE_PATH} reset ${CARGO_REV} --hard
+RUN sed -i "s/${AZURE_POM}/${NEXUS_VERSION}-${NEXUS_BUILD}/g" ${AZURE_PATH}/pom.xml
+RUN mvn -f ${AZURE_PATH}/pom.xml clean package
+RUN mkdir -p /nexus && cp ${AZURE_PATH}/target/nexus-blobstore-azure-cloud-${AZURE_VERSION}-sources.jar /nexus/
 
 ## Cargo
 
 ENV CARGO_POM=3.12.0-01
 ENV CARGO_REPO=https://github.com/sonatype-nexus-community/nexus-repository-cargo.git
 ENV CARGO_VERSION=0.0.1
-ENV CARGO_REV=331ac0b5ac26aa24f2bff9c11e06f10d54e42191
+ENV CARGO_REV=7a936a1cf6661168e38f36290e996b4f2ef160ea
 ENV CARGO_PATH=/srv/cargo
 
 RUN git clone ${CARGO_REPO} ${CARGO_PATH}
@@ -54,8 +54,8 @@ RUN mkdir -p /nexus && cp ${CARGO_PATH}/target/nexus-repository-cargo-${CARGO_VE
 
 ENV COMPOSER_POM=3.19.1-01
 ENV COMPOSER_REPO=https://github.com/sonatype-nexus-community/nexus-repository-composer.git
-ENV COMPOSER_VERSION=0.0.2
-ENV COMPOSER_REV=6727417907f0cf22393ce5a1f2eb083e926681b9
+ENV COMPOSER_VERSION=0.0.5-SNAPSHOT
+ENV COMPOSER_REV=bc57b50fd3c642d3b23b868b857eab1c7cbb3e31
 ENV COMPOSER_PATH=/srv/composer
 
 RUN git clone ${COMPOSER_REPO} ${COMPOSER_PATH}
@@ -83,7 +83,7 @@ RUN mkdir -p /nexus && cp ${CONAN_PATH}/target/nexus-repository-conan-${CONAN_VE
 ENV CPAN_POM=3.19.0-SNAPSHOT
 ENV CPAN_REPO=https://github.com/sonatype-nexus-community/nexus-repository-cpan.git
 ENV CPAN_VERSION=0.0.1
-ENV CPAN_REV=5f1fb44ac573869ca3ad071b09d1294dde243f39
+ENV CPAN_REV=21d24ea8e0d133df5a690e89c4fbd047ab7657e1
 ENV CPAN_PATH=/srv/cpan
 
 RUN git clone ${CPAN_REPO} ${CPAN_PATH}
@@ -94,52 +94,24 @@ RUN mkdir -p /nexus && cp ${CPAN_PATH}/nexus-repository-cpan/target/nexus-reposi
 
 ## Google
 
-ENV GOOGLE_POM=3.20.0-02
+ENV GOOGLE_POM=3.21.1-01
 ENV GOOGLE_REPO=https://github.com/sonatype-nexus-community/nexus-blobstore-google-cloud.git
-ENV GOOGLE_VERISON=0.10.1
-ENV GOOGLE_REV=6bea48da7b1f783229192dec027319f7bd2d9019
+ENV GOOGLE_VERISON=0.11.1-SNAPSHOT
+ENV GOOGLE_REV=a77a569ee413eb0005f81a262f0f6bc14f535ee4
 ENV GOOGLE_PATH=/srv/google
 
 RUN git clone ${GOOGLE_REPO} ${GOOGLE_PATH}
 RUN git -C ${GOOGLE_PATH} reset ${GOOGLE_REV} --hard
 RUN sed -i "s/${GOOGLE_POM}/${NEXUS_VERSION}-${NEXUS_BUILD}/g" ${GOOGLE_PATH}/pom.xml
 RUN mvn -f ${GOOGLE_PATH}/pom.xml clean package
-RUN mkdir -p /nexus && cp ${GOOGLE_PATH}/target/nexus-blobstore-google-cloud-${GOOGLE_VERISON}.kar /nexus/
-
-## Helm
-
-ENV HELM_POM=3.21.0-02
-ENV HELM_REPO=https://github.com/sonatype-nexus-community/nexus-repository-helm.git
-ENV HELM_VERSION=1.0.3-SNAPSHOT
-ENV HELM_REV=efe03517e64fb080d944bcbf9d2acb6e7f0a21c3
-ENV HELM_PATH=/srv/helm
-
-RUN git clone ${HELM_REPO} ${HELM_PATH}
-RUN git -C ${HELM_PATH} reset ${HELM_REV} --hard
-RUN sed -i "s/${HELM_POM}/${NEXUS_VERSION}-${NEXUS_BUILD}/g" ${HELM_PATH}/pom.xml
-RUN mvn -f ${HELM_PATH}/pom.xml -DskipTests clean package
-RUN mkdir -p /nexus && cp ${HELM_PATH}/nexus-repository-helm/target/nexus-repository-helm-${HELM_VERSION}.jar /nexus/
-
-## P2
-
-ENV P2_POM=3.19.1-01
-ENV P2_REPO=https://github.com/sonatype-nexus-community/nexus-repository-p2.git
-ENV P2_VERSION=0.0.3-SNAPSHOT
-ENV P2_REV=9705da99bd78abefd706844482e0996f4791f22f
-ENV P2_PATH=/srv/p2
-
-RUN git clone ${P2_REPO} ${P2_PATH}
-RUN git -C ${P2_PATH} reset ${P2_REV} --hard
-RUN sed -i "s/${P2_POM}/${NEXUS_VERSION}-${NEXUS_BUILD}/g" ${P2_PATH}/pom.xml
-RUN mvn -f ${P2_PATH}/pom.xml clean package
-RUN mkdir -p /nexus && cp ${P2_PATH}/nexus-repository-p2/target/nexus-repository-p2-${P2_VERSION}.jar /nexus/
+RUN mkdir -p /nexus && cp ${GOOGLE_PATH}/nexus-blobstore-google-cloud/target/nexus-blobstore-google-cloud-${GOOGLE_VERISON}.kar /nexus/
 
 ## Puppet
 
 ENV PUPPET_POM=3.14.0-04
 ENV PUPPET_REPO=https://github.com/sonatype-nexus-community/nexus-repository-puppet.git
 ENV PUPPET_VERSION=0.0.2
-ENV PUPPET_REV=ecc11681efa382913ebe0fcb9acb27c5323fbff7
+ENV PUPPET_REV=0d3ef06350252a57565bcac0138fd936c69d1a96
 ENV PUPPET_PATH=/srv/puppet
 
 RUN git clone ${PUPPET_REPO} ${PUPPET_PATH}
@@ -150,14 +122,14 @@ RUN mkdir -p /nexus && cp ${PUPPET_PATH}/target/nexus-repository-puppet-${PUPPET
 
 ## VGO
 
-ENV VGO_POM=3.15.2-01
-ENV VGO_REPO=https://github.com/sonatype-nexus-community/nexus-repository-vgo.git
-ENV VGO_VERSION=0.0.1
-ENV VGO_REV=393355341163e9ee358827d4623e81dd41bf1656
-ENV VGO_PATH=/srv/vgo
-
-RUN git clone ${VGO_REPO} ${VGO_PATH}
-RUN git -C ${VGO_PATH} reset ${VGO_REV} --hard
-RUN sed -i "s/${VGO_POM}/${NEXUS_VERSION}-${NEXUS_BUILD}/g" ${VGO_PATH}/pom.xml
-RUN mvn -f ${VGO_PATH}/pom.xml clean package
-RUN mkdir -p /nexus && cp ${VGO_PATH}/target/nexus-repository-vgo-${VGO_VERSION}.jar /nexus/
+#ENV VGO_POM=3.15.2-01
+#ENV VGO_REPO=https://github.com/sonatype-nexus-community/nexus-repository-vgo.git
+#ENV VGO_VERSION=0.0.1
+#ENV VGO_REV=393355341163e9ee358827d4623e81dd41bf1656
+#ENV VGO_PATH=/srv/vgo
+#
+#RUN git clone ${VGO_REPO} ${VGO_PATH}
+#RUN git -C ${VGO_PATH} reset ${VGO_REV} --hard
+#RUN sed -i "s/${VGO_POM}/${NEXUS_VERSION}-${NEXUS_BUILD}/g" ${VGO_PATH}/pom.xml
+#RUN mvn -f ${VGO_PATH}/pom.xml clean package
+#RUN mkdir -p /nexus && cp ${VGO_PATH}/target/nexus-repository-vgo-${VGO_VERSION}.jar /nexus/
