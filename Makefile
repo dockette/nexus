@@ -11,4 +11,4 @@ run-password:
 	docker exec -it nexus cat /nexus-data/admin.password
 
 build-plugins:
-	docker build -t dockette/nexus:plugins-${NEXUS_VERSION} --cache-from dockette/nexus:plugins-${CACHE_VERSION}  -f Dockerfile.plugins .
+	docker build -t dockette/nexus:plugins-${NEXUS_VERSION} -f Dockerfile.plugins .
