@@ -1,12 +1,16 @@
+FROM dockette/nexus:plugins-3.21.1 as previous
+
 FROM maven:3-jdk-8
 
-ENV NEXUS_VERSION=3.21.1
+ENV NEXUS_VERSION=3.22.1
 ENV NEXUS_BUILD=01
 
 RUN apt update && apt dist-upgrade -y && \
     apt install -y git
 
 WORKDIR /srv
+
+COPY --from=previous /root/.m2 /root/.m2
 
 ## Azure
 
@@ -55,7 +59,7 @@ RUN mkdir -p /nexus && cp ${CARGO_PATH}/target/nexus-repository-cargo-${CARGO_VE
 ENV COMPOSER_POM=3.19.1-01
 ENV COMPOSER_REPO=https://github.com/sonatype-nexus-community/nexus-repository-composer.git
 ENV COMPOSER_VERSION=0.0.5-SNAPSHOT
-ENV COMPOSER_REV=bc57b50fd3c642d3b23b868b857eab1c7cbb3e31
+ENV COMPOSER_REV=8a4ed87d8d27012627f16f1d16e9209e955577f6
 ENV COMPOSER_PATH=/srv/composer
 
 RUN git clone ${COMPOSER_REPO} ${COMPOSER_PATH}
@@ -63,20 +67,6 @@ RUN git -C ${COMPOSER_PATH} reset ${COMPOSER_REV} --hard
 RUN sed -i "s/${COMPOSER_POM}/${NEXUS_VERSION}-${NEXUS_BUILD}/g" ${COMPOSER_PATH}/pom.xml
 RUN mvn -f ${COMPOSER_PATH}/pom.xml clean package
 RUN mkdir -p /nexus && cp ${COMPOSER_PATH}/nexus-repository-composer/target/nexus-repository-composer-${COMPOSER_VERSION}.jar /nexus/
-
-## Conan
-
-ENV CONAN_POM=3.18.1-01
-ENV CONAN_REPO=https://github.com/sonatype-nexus-community/nexus-repository-conan.git
-ENV CONAN_VERSION=0.0.6
-ENV CONAN_REV=b9d72ea266c89555fe720dbc235e7266c0ba2cef
-ENV CONAN_PATH=/srv/conan
-
-RUN git clone ${CONAN_REPO} ${CONAN_PATH}
-RUN git -C ${CONAN_PATH} reset ${CONAN_REV} --hard
-RUN sed -i "s/${CONAN_POM}/${NEXUS_VERSION}-${NEXUS_BUILD}/g" ${CONAN_PATH}/pom.xml
-RUN mvn -f ${CONAN_PATH}/pom.xml clean package
-RUN mkdir -p /nexus && cp ${CONAN_PATH}/target/nexus-repository-conan-${CONAN_VERSION}.jar /nexus/
 
 ## Cpan
 
@@ -97,7 +87,7 @@ RUN mkdir -p /nexus && cp ${CPAN_PATH}/nexus-repository-cpan/target/nexus-reposi
 ENV GOOGLE_POM=3.21.1-01
 ENV GOOGLE_REPO=https://github.com/sonatype-nexus-community/nexus-blobstore-google-cloud.git
 ENV GOOGLE_VERISON=0.11.1-SNAPSHOT
-ENV GOOGLE_REV=a77a569ee413eb0005f81a262f0f6bc14f535ee4
+ENV GOOGLE_REV=01ff4679a5eb98eaf0a8d003398a7cc61d5df7fa
 ENV GOOGLE_PATH=/srv/google
 
 RUN git clone ${GOOGLE_REPO} ${GOOGLE_PATH}

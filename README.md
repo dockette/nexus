@@ -15,13 +15,15 @@
 ## Usage
 
 ```
-docker run -it --rm -p 8081:8081 dockette/nexus:3.20.1
+docker run -it --rm -p 8081:8081 dockette/nexus:3.22.1
 ```
 
 Available tags:
 
-- 3.20.1
 - latest
+- 3.22.1
+- 3.21.1
+- 3.20.1
 
 ## Documentation
 
@@ -29,15 +31,10 @@ This is Nexus 3 OSS build with full-features community plugins.
 
 **Community repositories**
 
-- cargo
-- chef [WIP]
 - composer
-- conan
 - cpan
-- helm
-- p2
+- cargo
 - puppet
-- vgo
 
 <p>
     <img width="350" src="https://github.com/dockette/nexus/blob/master/.docs/repos1.png">
@@ -46,7 +43,7 @@ This is Nexus 3 OSS build with full-features community plugins.
 
 **Community blobstores**
 
-- azure [WIP]
+- azure
 - google
 
 <p>
