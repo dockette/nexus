@@ -1,4 +1,4 @@
-FROM dockette/nexus:plugins-3.21.1 as previous
+FROM dockette/nexus:plugins-3.22.1 as previous
 
 FROM maven:3-jdk-8
 
@@ -65,8 +65,8 @@ ENV COMPOSER_PATH=/srv/composer
 RUN git clone ${COMPOSER_REPO} ${COMPOSER_PATH}
 RUN git -C ${COMPOSER_PATH} reset ${COMPOSER_REV} --hard
 RUN sed -i "s/${COMPOSER_POM}/${NEXUS_VERSION}-${NEXUS_BUILD}/g" ${COMPOSER_PATH}/pom.xml
-RUN mvn -f ${COMPOSER_PATH}/pom.xml clean package
-RUN mkdir -p /nexus && cp ${COMPOSER_PATH}/nexus-repository-composer/target/nexus-repository-composer-${COMPOSER_VERSION}.jar /nexus/
+RUN mvn -f ${COMPOSER_PATH}/pom.xml clean package -PbuildKar
+RUN mkdir -p /nexus && cp ${COMPOSER_PATH}/nexus-repository-composer/target/nexus-repository-composer-${COMPOSER_VERSION}-bundle.kar /nexus/
 
 ## Cpan
 
