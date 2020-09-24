@@ -16,7 +16,7 @@
 
 ```
 docker run -it --rm -p 8081:8081 dockette/nexus:latest
-docker run -it --rm -p 8081:8081 dockette/nexus:3.25.0
+docker run -it --rm -p 8081:8081 dockette/nexus:3.27.0
 ```
 
 ## Documentation
