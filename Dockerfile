@@ -15,3 +15,14 @@ RUN mvn -U org.apache.maven.plugins:maven-dependency-plugin:3.0.1:copy -Dartifac
 FROM sonatype/nexus3:$NEXUS_VERSION
 
 COPY --from=builder /nexus/*.jar /opt/sonatype/nexus/deploy/
+
+USER root
+
+RUN microdnf install util-linux && \
+    microdnf clean all
+
+COPY entrypoint.sh /entrypoint.sh
+
+RUN chmod 755 /entrypoint.sh
+
+CMD ["/entrypoint.sh"]
