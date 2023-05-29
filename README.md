@@ -35,6 +35,10 @@ This is Nexus 3 OSS build with full-features community plugins.
 - cpan
 - puppet
 
+**Defaults**
+
+Default repositories are disabled. Nexus is completly clean by default.
+
 <p>
     <img width="350" src="https://github.com/dockette/nexus/blob/master/.docs/repos1.png">
     <img width="350" src="https://github.com/dockette/nexus/blob/master/.docs/repos2.png">
