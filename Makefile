@@ -1,4 +1,4 @@
-NEXUS_VERSION ?= 3.65.0
+NEXUS_VERSION ?= 3.69.0
 
 .PHONY: build
 build:
