@@ -1,4 +1,4 @@
-ARG NEXUS_VERSION=3.69.0
+ARG NEXUS_VERSION=3.70.1
 
 FROM maven:3.9.0 as builder
 

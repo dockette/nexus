@@ -11,7 +11,7 @@ jobs:
       matrix:
         include:
           - context: .
-            tag: 3.69.0
+            tag: 3.70.1
 
       fail-fast: false
 
