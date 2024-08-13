@@ -21,7 +21,7 @@
 ## Usage
 
 ```
-docker run -it --rm -p 8081:8081 -v $(pwd)/data:/nexus-data dockette/nexus:3.70.1
+docker run -it --rm -p 8081:8081 -v $(pwd)/data:/nexus-data dockette/nexus:3.71.0
 ```
 
 ## Documentation
