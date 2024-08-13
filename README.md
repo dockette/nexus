@@ -21,14 +21,18 @@
 ## Usage
 
 ```
-docker run -it --rm -p 8081:8081 -v $(pwd)/data:/nexus-data dockette/nexus:3.71.0
+docker run -it --rm -p 8081:8081 -v $(pwd)/data:/nexus-data dockette/nexus:3.71.0-java17-ubi
 ```
 
 ## Documentation
 
 This is Nexus 3 OSS build with full-features community plugins.
 
-**Community repositories**
+**Community repositories** (`3.71+`)
+
+- WIP
+
+**Community repositories** (`<3.71`)
 
 - apk
 - composer
