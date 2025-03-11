@@ -2,7 +2,12 @@ NEXUS_VERSION ?= 3.78.1-java17-ubi
 
 .PHONY: build
 build:
-	docker build --build-arg NEXUS_VERSION=${NEXUS_VERSION} -t dockette/nexus .
+	docker buildx \
+		build \
+		--build-arg NEXUS_VERSION=${NEXUS_VERSION} \
+		--platform linux/amd64 \
+		-t dockette/nexus \
+		.
 
 .PHONY: run
 run: 

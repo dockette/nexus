@@ -1,6 +1,6 @@
 ARG NEXUS_VERSION=3.78.1-java17-ubi
 
-FROM maven:3.9.0 as builder
+FROM maven:3.9.0 AS builder
 
 # Blobstores
 # RUN mvn -U org.apache.maven.plugins:maven-dependency-plugin:3.0.1:copy -Dartifact=org.sonatype.nexus.plugins:nexus-blobstore-google-cloud:0.20.0 -DoutputDirectory=/nexus
@@ -18,7 +18,7 @@ FROM sonatype/nexus3:$NEXUS_VERSION
 
 USER root
 
-RUN microdnf install util-linux && \
+RUN microdnf install -y util-linux && \
     microdnf clean all
 
 COPY entrypoint.sh /entrypoint.sh
