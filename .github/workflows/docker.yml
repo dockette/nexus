@@ -11,7 +11,7 @@ jobs:
       matrix:
         include:
           - context: .
-            tag: 3.78.1-java17-ubi
+            tag: 3.82.1-java17-ubi
 
       fail-fast: false
 

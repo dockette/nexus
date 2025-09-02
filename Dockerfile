@@ -1,4 +1,4 @@
-ARG NEXUS_VERSION=3.78.1-java17-ubi
+ARG NEXUS_VERSION=3.82.1-java17-ubi
 
 FROM maven:3.9.0 AS builder
 
