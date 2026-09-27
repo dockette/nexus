@@ -1,6 +1,6 @@
-ARG NEXUS_VERSION=3.82.1-java17-ubi
+ARG NEXUS_VERSION=3.96.3-ubi
 
-FROM maven:3.9.0 AS builder
+FROM maven:3.9.16 AS builder
 
 # Blobstores
 # RUN mvn -U org.apache.maven.plugins:maven-dependency-plugin:3.0.1:copy -Dartifact=org.sonatype.nexus.plugins:nexus-blobstore-google-cloud:0.20.0 -DoutputDirectory=/nexus

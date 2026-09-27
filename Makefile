@@ -1,4 +1,4 @@
-NEXUS_VERSION ?= 3.82.1-java17-ubi
+NEXUS_VERSION ?= 3.96.3-ubi
 
 .PHONY: build
 build:
