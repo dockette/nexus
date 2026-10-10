@@ -45,3 +45,12 @@ jobs:
           platforms: linux/amd64
           build-args: |
             NEXUS_VERSION=${{ matrix.tag }}
+
+  docs:
+    name: "Docs"
+    needs: docker
+    if: github.ref == 'refs/heads/master'
+    uses: dockette/.github/.github/workflows/dockerhub-description.yml@master
+    secrets: inherit
+    with:
+      image: "dockette/nexus"
